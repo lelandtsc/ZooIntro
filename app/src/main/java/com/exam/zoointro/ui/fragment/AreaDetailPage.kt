@@ -152,7 +152,7 @@ class AreaDetailPage: Fragment() {
     private fun filterPlantList(plantList: List<Plant>): ArrayList<Plant>? {
         val filteredPlantList: ArrayList<Plant>? = ArrayList()
         for (plant in plantList) {
-            if (plant.f_location?.contains(mAreaName?.substring(0, (mAreaName?.length ?: 0) - 1).toString(),
+            if (plant.f_location?.contains(mAreaName?.substring(0, 2).toString(),
                     false) == true) filteredPlantList?.add(plant)
         }
         return filteredPlantList
