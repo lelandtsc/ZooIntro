@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">動物園簡介</string>
+    <string name="title_area_list">台北市立動物園管區簡介</string>
+    <string name="label_plants_in_area">館區植物</string>
+    <string name="label_plant_also_known">別名</string>
+    <string name="label_plant_brief">簡介</string>
+    <string name="label_plant_feature">辨別方式</string>
+    <string name="label_plant_function">功能性</string>
+    <string name="label_plant_last_update">最後更新</string>
+</resources>
