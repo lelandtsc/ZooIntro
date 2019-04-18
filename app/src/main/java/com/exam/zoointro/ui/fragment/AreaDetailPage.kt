@@ -112,7 +112,7 @@ class AreaDetailPage: Fragment() {
         }
         text_area_info?.text = areaInfo
         text_area_memo?.text = areaMemo
-        text_area_memo?.visibility = if (areaMemo?.isNullOrBlank()) View.GONE else View.VISIBLE
+        text_area_memo?.visibility = if (areaMemo.isBlank()) View.GONE else View.VISIBLE
         text_area_category?.text = areaCategory
 
         mAreaName = areaName
@@ -152,7 +152,8 @@ class AreaDetailPage: Fragment() {
     private fun filterPlantList(plantList: List<Plant>): ArrayList<Plant>? {
         val filteredPlantList: ArrayList<Plant>? = ArrayList()
         for (plant in plantList) {
-            if (plant.f_location?.contains(mAreaName.toString(), false) == true) filteredPlantList?.add(plant)
+            if (plant.f_location?.contains(mAreaName?.substring(0, (mAreaName?.length ?: 0) - 1).toString(),
+                    false) == true) filteredPlantList?.add(plant)
         }
         return filteredPlantList
     }
