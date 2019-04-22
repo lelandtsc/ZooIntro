@@ -10,8 +10,6 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
-import android.widget.TextView
 import com.bumptech.glide.Glide
 import com.exam.zoointro.R
 import com.exam.zoointro.data.net.Rest
@@ -63,15 +61,7 @@ class AreaDetailPage: Fragment() {
         }
 
         override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-            (holder as PlantItem).bind(position, mFilteredPlantList?.get(position))
-            val imageArea = holder.itemView?.findViewById<ImageView>(R.id.image_area)
-            val textPlantName = holder.itemView?.findViewById<TextView>(R.id.text_plant_name)
-            val textPlantAlsoKnown = holder.itemView?.findViewById<TextView>(R.id.text_plant_also_known)
-            context?.let {
-                imageArea?.let { Glide.with(it).load(mFilteredPlantList?.get(position)?.f_pic01_url).into(it) }
-            }
-            textPlantName?.text = mFilteredPlantList?.get(position)?.f_name_ch
-            textPlantAlsoKnown?.text = mFilteredPlantList?.get(position)?.f_alsoKnown
+            (holder as PlantItem).bind(context, position, mFilteredPlantList?.get(position))
         }
 
         override fun getItemCount(): Int {

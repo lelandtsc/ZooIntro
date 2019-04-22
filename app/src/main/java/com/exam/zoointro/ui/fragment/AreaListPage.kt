@@ -10,9 +10,6 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
-import android.widget.TextView
-import com.bumptech.glide.Glide
 import com.exam.zoointro.R
 import com.exam.zoointro.data.net.Rest
 import com.exam.zoointro.domain.entity.Area
@@ -49,17 +46,7 @@ class AreaListPage: Fragment() {
         }
 
         override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-            (holder as AreaItem).bind(position, mAreaList?.get(position))
-            val imageArea = holder.itemView?.findViewById<ImageView>(R.id.image_area)
-            val textAreaTitle = holder.itemView?.findViewById<TextView>(R.id.text_area_title)
-            val textAreaInfo = holder.itemView?.findViewById<TextView>(R.id.text_area_info)
-            val textAreaMemo = holder.itemView?.findViewById<TextView>(R.id.text_area_memo)
-            context?.let {
-                imageArea?.let { Glide.with(it).load(mAreaList?.get(position)?.e_pic_url).into(it) }
-            }
-            textAreaTitle?.text = mAreaList?.get(position)?.e_name
-            textAreaInfo?.text = mAreaList?.get(position)?.e_info
-            textAreaMemo?.text = mAreaList?.get(position)?.e_memo
+            (holder as AreaItem).bind(context, position, mAreaList?.get(position))
         }
 
         override fun getItemCount(): Int {
