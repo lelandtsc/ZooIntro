@@ -29,14 +29,11 @@ class AreaDetailPage: Fragment() {
 
     companion object {
         private const val TAG = "AreaDetailPage"
+        private const val KEY_AREA = "area"
 
         fun newInstance(area: Area?): AreaDetailPage {
             val arguments = Bundle()
-            arguments.putSerializable("E_Pic_URL", area?.e_pic_url)
-            arguments.putSerializable("E_Name", area?.e_name)
-            arguments.putSerializable("E_Info", area?.e_info)
-            arguments.putSerializable("E_Memo", area?.e_memo)
-            arguments.putSerializable("E_Category", area?.e_category)
+            arguments.putParcelable(KEY_AREA, area)
             val areaDetailPage = AreaDetailPage()
             areaDetailPage.arguments = arguments
             return areaDetailPage
@@ -91,22 +88,18 @@ class AreaDetailPage: Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val picUrl = arguments?.get("E_Pic_URL")
-        val areaName = arguments?.get("E_Name").toString()
-        val areaInfo = arguments?.get("E_Info").toString()
-        val areaMemo = arguments?.get("E_Memo").toString()
-        val areaCategory = arguments?.get("E_Category").toString()
+        val area = arguments?.getParcelable<Area>(KEY_AREA)
 
         context?.let {
-            image_area?.let { Glide.with(it).load(picUrl).into(it) }
+            image_area?.let { Glide.with(it).load(area?.e_pic_url).into(it) }
         }
-        text_area_info?.text = areaInfo
-        text_area_memo?.text = areaMemo
-        text_area_memo?.visibility = if (areaMemo.isBlank()) View.GONE else View.VISIBLE
-        text_area_category?.text = areaCategory
+        text_area_info?.text = area?.e_info
+        text_area_memo?.text = area?.e_memo
+        text_area_memo?.visibility = if (area?.e_memo?.isEmpty() == true) View.GONE else View.VISIBLE
+        text_area_category?.text = area?.e_category
 
-        mAreaName = areaName
-        title_bar?.init(0, areaName, true)
+        mAreaName = area?.e_name
+        title_bar?.init(0, area?.e_name, true)
         button_left?.setOnClickListener { activity?.supportFragmentManager?.popBackStackImmediate() }
         val layoutManager = LinearLayoutManager(context)
         val dividerItemDecoration = DividerItemDecoration(recycler_plant_list?.context, layoutManager.orientation)
